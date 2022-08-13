@@ -16,7 +16,15 @@ export function Toggle({ children }) {
   );
 }
 
-export const useToggle = () => React.useContext(ToggleContext);
+//export const useToggle = () => React.useContext(ToggleContext);
+
+export const useToggle = () => {
+  const context = React.useContext(ToggleContext);
+  if (!context) {
+    throw new Error("useToggle must be used within <Toggle />");
+  }
+  return context;
+};
 
 export const ToggleOn = ({ children }) => {
   const { on } = useToggle();
